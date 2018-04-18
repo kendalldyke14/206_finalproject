@@ -8,21 +8,26 @@ Commands Available:
         Description: Returns 3 review previews from the specified restaurant.
         **Can only be used on an active results set.
 
+        see full review <review number>
+            Description: Opens full review in browser. Enter either 1, 2, or 3
+            corresponding to each returned review.
+            *Must be used after "get reviews"
+
     get tweets <result number>
         Description: Returns up to 10 Tweets about the specified restaurant.
         **Can only be used on an active results set.
 
-    price pie
+    price pie chart
         Description: Creates pie chart which shows distribution of prices
                   in the area.
         **Will present data based on last active result set.
 
-    rating bars
+    rating bar chart
         Description: Creates bar chart which shows distribution of ratings
                   in the area.
         **Will present data based on last active result set.
 
-    rating box on price
+    rating boxplot by price
         Description: Creates boxplots in the area
                 (one plot for each price level).
         **Will present data based on last active result set.
