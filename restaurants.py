@@ -135,28 +135,27 @@ def create_yelp_db():
     cur.execute(statement)
     conn.commit()
 
-    try:
+    #try:
         # Your code goes here
-        statement = '''
-            CREATE TABLE 'Restaurants' (
-                'Id' INTEGER PRIMARY KEY AUTOINCREMENT,
-                'BusinessId' TEXT,
-                'Name' TEXT NOT NULL,
-                'Rating' REAL NOT NULL,
-                'Latitude' REAL NOT NULL,
-                'Longitude' REAL NOT NULL,
-                'Price' TEXT,
-                'StreetAddress' TEXT NOT NULL,
-                'City' TEXT NOT NULL,
-                'State' TEXT NOT NULL,
-                'ZipCode' INTEGER,
-                'Phone' TEXT,
-                'SearchedAddress' TEXT
-            );
-        '''
-        cur.execute(statement)
-    except:
-        print("Could not initialize Restaurants table")
+    statement = '''
+        CREATE TABLE 'Restaurants' (
+            'BusinessId' TEXT PRIMARY KEY,
+            'Name' TEXT NOT NULL,
+            'Rating' REAL NOT NULL,
+            'Latitude' REAL NOT NULL,
+            'Longitude' REAL NOT NULL,
+            'Price' TEXT,
+            'StreetAddress' TEXT NOT NULL,
+            'City' TEXT NOT NULL,
+            'State' TEXT NOT NULL,
+            'ZipCode' INTEGER,
+            'Phone' TEXT,
+            'SearchedAddress' TEXT
+        );
+    '''
+    cur.execute(statement)
+    #except:
+    #    print("Could not initialize Restaurants table")
     try:
         statement = '''
             CREATE TABLE 'Reviews' (
@@ -187,18 +186,18 @@ def fill_yelp_db(address):
     business_info = YELP_CACHE_DICTION[compact_address]['businesses']
     for row in business_info:
         if 'price' in row.keys():
-            insertion = (None, row['id'], row['name'], row['rating'], row['coordinates']['latitude'], row['coordinates']['longitude'],
+            insertion = (row['id'], row['name'], row['rating'], row['coordinates']['latitude'], row['coordinates']['longitude'],
             row['price'], row['location']['address1'], row['location']['city'], row['location']['state'],
             row['location']['zip_code'], row['display_phone'], compact_address)
             statement = 'INSERT INTO "Restaurants" '
-            statement += 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)'
+            statement += 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)'
             cur.execute(statement, insertion)
         else:
-            insertion = (None, row['id'], row['name'], row['rating'], row['coordinates']['latitude'], row['coordinates']['longitude'],
+            insertion = (row['id'], row['name'], row['rating'], row['coordinates']['latitude'], row['coordinates']['longitude'],
             None, row['location']['address1'], row['location']['city'], row['location']['state'],
             row['location']['zip_code'], row['display_phone'], compact_address)
             statement = 'INSERT INTO "Restaurants" '
-            statement += 'VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)'
+            statement += 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)'
             cur.execute(statement, insertion)
         conn.commit()
 

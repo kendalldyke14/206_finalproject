@@ -28,8 +28,8 @@ class TestDatabase(unittest.TestCase):
     def test_db_tables(self):
         conn = sqlite.connect(DBNAME)
         cur = conn.cursor()
-        #create_yelp_db()
-        #fill_yelp_db("Ann Arbor, MI 48104")
+        create_yelp_db()
+        fill_yelp_db("Chicago, IL 60601")
 
         sql = 'SELECT City FROM Restaurants'
         results = cur.execute(sql)
@@ -49,7 +49,7 @@ class TestClasses(unittest.TestCase):
         restaurant_insts = get_restaurants("Chicago, IL 60601")
         self.assertEqual(restaurant_insts[0].business_id, 'boE4Ahsssqic7o5wQLI04w')
         self.assertEqual(restaurant_insts[49].rating, 4.0)
-        
+
     def test_review_class(self):
         restaurant_insts = get_restaurants("Chicago, IL 60601")
         review_insts = get_reviews(restaurant_insts, 1)
