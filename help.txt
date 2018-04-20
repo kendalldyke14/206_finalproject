@@ -28,8 +28,8 @@ Commands Available:
         **Will present data based on last active result set.
 
     rating boxplot by price
-        Description: Creates boxplots in the area
-                (one plot for each price level).
+        Description: Creates boxplots of ratings in the area
+                (one box for each price level).
         **Will present data based on last active result set.
 
     create map
